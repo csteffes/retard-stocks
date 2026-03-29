@@ -437,16 +437,17 @@ main {
 
 .article-lead-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.95rem;
-}
-
-.article-lead-panel {
-  aspect-ratio: 15 / 10;
+  grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr);
+  gap: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   background: var(--surface);
+}
+
+.article-lead-panel {
+  min-height: clamp(13rem, 20vw, 17rem);
+  overflow: hidden;
 }
 
 .article-lead-panel img {
@@ -459,11 +460,11 @@ main {
 }
 
 .article-lead-panel--top img {
-  object-position: center 11%;
+  object-position: 24% 12%;
 }
 
 .article-lead-panel--bottom img {
-  object-position: center 87%;
+  object-position: 74% 86%;
 }
 
 .meta-grid {
