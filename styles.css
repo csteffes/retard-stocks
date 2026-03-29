@@ -350,17 +350,6 @@ main {
   text-decoration-thickness: 0.12em;
 }
 
-.tag {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.14rem 0.6rem;
-  background: var(--surface);
-  color: var(--muted);
-  line-height: 1.2;
-}
-
 .archive-item-row {
   display: grid;
   grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr);

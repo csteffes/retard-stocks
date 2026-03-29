@@ -41,7 +41,6 @@ This project is intentionally simple:
    - `ticker`
    - `company`
    - `date` in `YYYY-MM-DD`
-   - `classification`
    - `horizon`
    - `title`
    - `thesis`

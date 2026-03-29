@@ -124,7 +124,6 @@ function renderLatestPicks() {
             <span class="stocks-covered-value">${renderStocksCovered(pick.stocksCovered)}</span>
           </p>
           <p class="pick-meta">
-            <span class="tag">${escapeHtml(pick.classification)}</span>
             <span>${escapeHtml(pick.horizon)}</span>
           </p>
           <p>${escapeHtml(pick.thesis)}</p>
@@ -162,7 +161,6 @@ function renderArchive() {
                 )}</span>
               </p>
               <p class="pick-meta">
-                <span class="tag">${escapeHtml(pick.classification)}</span>
                 <span>${escapeHtml(pick.horizon)}</span>
               </p>
               <p>${escapeHtml(pick.thesis)}</p>

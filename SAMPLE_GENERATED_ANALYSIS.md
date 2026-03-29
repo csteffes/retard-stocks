@@ -3,7 +3,6 @@
 **Ticker:** [$CPRT](https://robinhood.com/us/en/stocks/CPRT/)  
 **Company:** [Copart](https://www.copart.com/)  
 **Publish Date:** March 28, 2026  
-**Classification:** Long  
 **Hold Period:** 12-24 months
 
 ## Quick take

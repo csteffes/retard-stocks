@@ -17,7 +17,6 @@ window.PICKS = [
       { ticker: "SMIZF", quoteSource: "yahoo" },
     ],
     date: "2026-03-28",
-    classification: "Special Situation",
     horizon: "3-12 months",
     title: "Three Stocks to Trade American Intervention in Cuba",
     thesis:
@@ -30,7 +29,6 @@ window.PICKS = [
     company: "NVIDIA",
     stocksCovered: ["NVDA"],
     date: "2026-03-21",
-    classification: "Long",
     horizon: "12-24 months",
     title: "The market is still underestimating operating leverage",
     thesis:
@@ -43,7 +41,6 @@ window.PICKS = [
     company: "Meta Platforms",
     stocksCovered: ["META"],
     date: "2026-03-12",
-    classification: "Long",
     horizon: "12-24 months",
     title: "The earnings engine is broader than the story suggests",
     thesis:
@@ -56,7 +53,6 @@ window.PICKS = [
     company: "Tesla",
     stocksCovered: ["TSLA"],
     date: "2026-02-18",
-    classification: "Watchlist",
     horizon: "6-18 months",
     title: "Great narrative, tougher underwriting",
     thesis:
