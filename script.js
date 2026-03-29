@@ -117,7 +117,7 @@ function createPostLink(label, pick, alignRight) {
   return `
     <a class="post-pagination-card ${
       alignRight ? "post-pagination-card--align-right" : ""
-    }" href="../${escapeHtml(pick.href)}">
+    }" href="${escapeHtml(pick.href)}">
       <span class="post-pagination-label">${escapeHtml(label)}</span>
       <span class="post-pagination-title">
         ${escapeHtml(pick.ticker)} — ${escapeHtml(pick.title)}
@@ -150,7 +150,7 @@ function renderPostPagination() {
       older
         ? createPostLink("Older note", older, true)
         : `
-          <a class="post-pagination-card post-pagination-card--align-right" href="../archive.html">
+          <a class="post-pagination-card post-pagination-card--align-right" href="/archive">
             <span class="post-pagination-label">Browse more</span>
             <span class="post-pagination-title">Back to archive</span>
           </a>
@@ -159,7 +159,18 @@ function renderPostPagination() {
   `;
 }
 
+function applyPrettyUrl() {
+  const prettyUrl = document.body.dataset.prettyUrl;
+
+  if (!prettyUrl || window.location.pathname === prettyUrl) {
+    return;
+  }
+
+  history.replaceState(null, "", `${prettyUrl}${window.location.search}${window.location.hash}`);
+}
+
 setActiveNav();
 renderLatestPicks();
 renderArchive();
 renderPostPagination();
+applyPrettyUrl();

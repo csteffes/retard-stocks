@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retard Stocks</title>
+    <meta
+      name="description"
+      content="To make retarded money, pick retarded stock"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/data/picks.js" defer></script>
+    <script src="/script.js" defer></script>
+  </head>
+  <body data-page="home" data-pretty-url="/home">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-shell site-header-inner">
+        <p class="site-title"><a href="/home">Retard Stocks</a></p>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/home" data-nav="home">Home</a>
+          <a href="/archive" data-nav="archive">Archive</a>
+          <a href="/about" data-nav="about">About / Disclaimer</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="site-shell">
+      <section class="page-intro">
+        <!-- Edit the homepage introduction copy in this section. -->
+        <h1>Retard Stocks</h1>
+        <p class="home-tagline">
+          To make retarded money, pick retarded stock
+        </p>
+        <p class="lede">
+          This is a simple public notebook for stock ideas worth underwriting in
+          public. I use it to publish concise theses, deeper writeups, and a
+          clean archive of names that still matter after the first headline
+          fades.
+        </p>
+      </section>
+
+      <section class="page-section">
+        <div class="section-heading-row">
+          <h2>Latest Strategies</h2>
+          <a class="section-link" href="/archive">View archive</a>
+        </div>
+        <div class="card-list" data-latest-picks></div>
+        <noscript>
+          <div class="no-script">
+            <p>
+              JavaScript is only used to render the pick index. You can still
+              read the current notes directly:
+            </p>
+            <ul>
+              <li><a href="/picks/nvda.html">NVDA</a></li>
+              <li><a href="/picks/meta.html">META</a></li>
+              <li><a href="/picks/tsla.html">TSLA</a></li>
+            </ul>
+          </div>
+        </noscript>
+      </section>
+
+      <section class="page-section page-section--narrow">
+        <h2>What to expect</h2>
+        <p>
+          The focus is not news flow or hot takes. Most notes are built around a
+          simple question: what is the market missing, misweighing, or
+          prematurely dismissing?
+        </p>
+        <p>
+          Some ideas will be longs. Some will be watchlist names. A few may be
+          explicit shorts or special situations. The common thread is that each
+          note tries to separate what is knowable from what is merely possible.
+        </p>
+      </section>
+
+      <section class="page-section page-section--narrow">
+        <h2>Disclaimer</h2>
+        <p class="small-print">
+          Everything here is personal research and opinion, published for
+          educational purposes. It is not investment advice, not a solicitation,
+          and not a real-time statement of current positions. Markets move.
+          Views change. Do your own work.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-shell footer-inner">
+        <p>To make retarded money, pick retarded stock</p>
+        <p><a href="/about">Read the full disclaimer</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

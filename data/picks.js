@@ -12,7 +12,7 @@ window.PICKS = [
     title: "The market is still underestimating operating leverage",
     thesis:
       "Even if revenue growth decelerates from extraordinary levels, mix, software attach, and full-stack deployment can keep earnings power higher than the market expects.",
-    href: "picks/nvda.html",
+    href: "/picks/nvda.html",
   },
   {
     slug: "meta",
@@ -24,7 +24,7 @@ window.PICKS = [
     title: "The earnings engine is broader than the story suggests",
     thesis:
       "Meta is still framed as an ad-cycle company, but messaging monetization, AI-driven ad tools, and better Reels economics are widening the earnings base.",
-    href: "picks/meta.html",
+    href: "/picks/meta.html",
   },
   {
     slug: "tsla",
@@ -36,6 +36,6 @@ window.PICKS = [
     title: "Great narrative, tougher underwriting",
     thesis:
       "The operating business is real, but the stock often prices in autonomy and platform optionality before those economics are visible enough to underwrite cleanly.",
-    href: "picks/tsla.html",
+    href: "/picks/tsla.html",
   },
 ];
