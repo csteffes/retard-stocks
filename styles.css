@@ -317,6 +317,21 @@ main {
   color: var(--accent);
 }
 
+.pick-card-layout {
+  display: block;
+}
+
+.pick-card-layout--with-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(16rem, 22rem);
+  gap: 1.3rem 1.7rem;
+  align-items: start;
+}
+
+.pick-card-copy {
+  min-width: 0;
+}
+
 .pick-meta {
   display: flex;
   flex-wrap: wrap;
@@ -359,6 +374,46 @@ main {
 
 .company-site-link:hover {
   text-decoration-thickness: 0.12em;
+}
+
+.pick-card-media {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--surface);
+  text-decoration: none;
+  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.pick-card-media:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  box-shadow: 0 8px 18px rgba(22, 21, 19, 0.08);
+}
+
+.pick-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pick-card-media--split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr);
+  min-height: 13.5rem;
+}
+
+.pick-card-media-panel {
+  overflow: hidden;
+}
+
+.pick-card-media-panel--left img {
+  object-position: 24% 12%;
+}
+
+.pick-card-media-panel--right img {
+  object-position: 74% 86%;
 }
 
 .archive-item-row {
@@ -1063,6 +1118,14 @@ main {
   .post-pagination,
   .chart-grid--two {
     grid-template-columns: 1fr;
+  }
+
+  .pick-card-layout--with-media {
+    grid-template-columns: 1fr;
+  }
+
+  .pick-card-media--split {
+    min-height: 12rem;
   }
 
   .post-pagination-card--align-right {

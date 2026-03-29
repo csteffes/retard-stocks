@@ -98,6 +98,41 @@ function renderStocksCovered(stocksCovered) {
     .join(", ");
 }
 
+function renderPreviewMedia(pick) {
+  const media = pick.previewMedia;
+
+  if (!media || typeof media !== "object" || !media.src) {
+    return "";
+  }
+
+  if (media.type === "split-meme") {
+    return `
+      <a
+        class="pick-card-media pick-card-media--split"
+        href="${escapeHtml(pick.href)}"
+        aria-label="Open ${escapeHtml(pick.title)}"
+      >
+        <span class="pick-card-media-panel pick-card-media-panel--left">
+          <img src="${escapeHtml(media.src)}" alt="${escapeHtml(media.alt || pick.title)}" />
+        </span>
+        <span class="pick-card-media-panel pick-card-media-panel--right" aria-hidden="true">
+          <img src="${escapeHtml(media.src)}" alt="" />
+        </span>
+      </a>
+    `;
+  }
+
+  return `
+    <a
+      class="pick-card-media"
+      href="${escapeHtml(pick.href)}"
+      aria-label="Open ${escapeHtml(pick.title)}"
+    >
+      <img src="${escapeHtml(media.src)}" alt="${escapeHtml(media.alt || pick.title)}" />
+    </a>
+  `;
+}
+
 function sortPicksDescending(items) {
   return items.sort((left, right) => parseDate(right.date) - parseDate(left.date));
 }
@@ -115,19 +150,26 @@ function renderLatestPicks() {
     .map(
       (pick) => `
         <article class="pick-card">
-          <p class="pick-card-kicker">${escapeHtml(formatDate(pick.date))}</p>
-          <h3>
-            <a href="${escapeHtml(pick.href)}">${escapeHtml(pick.title)}</a>
-          </h3>
-          <p class="stocks-covered-line">
-            <span class="stocks-covered-label">Stocks Covered:</span>
-            <span class="stocks-covered-value">${renderStocksCovered(pick.stocksCovered)}</span>
-          </p>
-          <p class="pick-meta">
-            <span class="stocks-covered-label">Hold Period:</span>
-            <span>${escapeHtml(pick.horizon)}</span>
-          </p>
-          <p>${escapeHtml(pick.thesis)}</p>
+          <div class="pick-card-layout${pick.previewMedia ? " pick-card-layout--with-media" : ""}">
+            <div class="pick-card-copy">
+              <p class="pick-card-kicker">${escapeHtml(formatDate(pick.date))}</p>
+              <h3>
+                <a href="${escapeHtml(pick.href)}">${escapeHtml(pick.title)}</a>
+              </h3>
+              <p class="stocks-covered-line">
+                <span class="stocks-covered-label">Stocks Covered:</span>
+                <span class="stocks-covered-value">${renderStocksCovered(
+                  pick.stocksCovered
+                )}</span>
+              </p>
+              <p class="pick-meta">
+                <span class="stocks-covered-label">Hold Period:</span>
+                <span>${escapeHtml(pick.horizon)}</span>
+              </p>
+              <p>${escapeHtml(pick.thesis)}</p>
+            </div>
+            ${renderPreviewMedia(pick)}
+          </div>
         </article>
       `
     )
