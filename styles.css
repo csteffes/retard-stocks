@@ -11,7 +11,7 @@
   --serif-font: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia,
     serif;
   --max-width: 75rem;
-  --reading-width: 47rem;
+  --reading-width: 52rem;
 }
 
 *,
@@ -429,6 +429,41 @@ main {
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   background: var(--surface);
+}
+
+.article-lead-image--split {
+  margin: 1.1rem 0 1.35rem;
+}
+
+.article-lead-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.article-lead-panel {
+  aspect-ratio: 15 / 10;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--surface);
+}
+
+.article-lead-panel img {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  object-fit: cover;
+}
+
+.article-lead-panel--top img {
+  object-position: center 11%;
+}
+
+.article-lead-panel--bottom img {
+  object-position: center 87%;
 }
 
 .meta-grid {
@@ -1035,6 +1070,22 @@ main {
 
   .meta-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .article-lead-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .article-lead-panel {
+    aspect-ratio: 16 / 10;
+  }
+
+  .article-lead-panel--top img {
+    object-position: center 10%;
+  }
+
+  .article-lead-panel--bottom img {
+    object-position: center 86%;
   }
 
   .stock-chart-stat {
