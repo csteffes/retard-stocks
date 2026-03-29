@@ -341,13 +341,13 @@ main {
 }
 
 .company-site-link {
-  color: var(--text);
-  text-decoration-color: rgba(22, 21, 19, 0.24);
+  color: var(--accent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
 }
 
 .company-site-link:hover {
-  color: var(--accent);
-  text-decoration-color: currentColor;
+  text-decoration-thickness: 0.12em;
 }
 
 .tag {
