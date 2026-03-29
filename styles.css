@@ -431,12 +431,6 @@ main {
   background: var(--surface);
 }
 
-.article-lead-image--tight img {
-  height: clamp(30rem, 72vw, 58rem);
-  object-fit: cover;
-  object-position: center top;
-}
-
 .meta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
