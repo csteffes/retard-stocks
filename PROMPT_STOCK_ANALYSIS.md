@@ -68,7 +68,7 @@ Input block:
 - Current price: [CURRENT_PRICE or "unknown"]
 - Market cap: [MARKET_CAP or "unknown"]
 - Classification: [Long / Short / Watchlist / Special Situation]
-- Time horizon: [TIME_HORIZON]
+- Hold Period: [TIME_HORIZON]
 - Thesis angle: [THESIS_ANGLE]
 - Why now: [WHY_NOW]
 - Special facts or notes from me: [NOTES]
@@ -83,7 +83,7 @@ Now write the memo in this exact format:
 **Company:** [COMPANY]([COMPANY_WEBSITE])  
 **Publish Date:** [Month Day, Year]  
 **Classification:** [CLASSIFICATION]  
-**Time horizon:** [TIME_HORIZON]
+**Hold Period:** [TIME_HORIZON]
 
 ## Quick take
 

@@ -4,7 +4,7 @@
 **Company:** [Copart](https://www.copart.com/)  
 **Publish Date:** March 28, 2026  
 **Classification:** Long  
-**Time horizon:** 12-24 months
+**Hold Period:** 12-24 months
 
 ## Quick take
 

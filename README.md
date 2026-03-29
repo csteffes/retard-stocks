@@ -58,7 +58,7 @@ This project is intentionally simple:
 ## How to use the stock analysis prompt
 
 1. Open `PROMPT_STOCK_ANALYSIS.md`
-2. Fill in the input placeholders for company, ticker, market cap, thesis angle, time horizon, and any notes you want the model to respect
+2. Fill in the input placeholders for company, ticker, market cap, thesis angle, hold period, and any notes you want the model to respect
 3. Paste the full prompt into your LLM of choice
 4. Use `STOCK_ANALYSIS_TEMPLATE.md` as the structure check
 5. Copy the generated draft into a new file in `/picks`, then make any edits you want before publishing
