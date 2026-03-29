@@ -23,8 +23,8 @@ window.PICKS = [
       "Carnival, Sherritt, and Meliá offer three very different ways to express the same Cuba intervention and reopening trade, from liquid tourism exposure to a distressed on-island lottery ticket.",
     href: "/picks/cuba-trade.html",
     previewMedia: {
-      type: "split-meme",
-      src: "/images/cuba-polymarket-meme.png?v=2",
+      type: "image",
+      src: "/images/cuba-polymarket-meme.png?v=3",
       alt: "Polymarket Cuba intervention chart paired with the CJ 'Ah shit, here we go again' meme.",
     },
   },
