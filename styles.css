@@ -432,7 +432,7 @@ main {
 }
 
 .article-lead-image--tight img {
-  height: clamp(22rem, 60vw, 42rem);
+  height: clamp(30rem, 72vw, 58rem);
   object-fit: cover;
   object-position: center top;
 }
