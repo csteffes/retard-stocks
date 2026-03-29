@@ -120,7 +120,7 @@ function renderLatestPicks() {
             <a href="${escapeHtml(pick.href)}">${escapeHtml(pick.title)}</a>
           </h3>
           <p class="stocks-covered-line">
-            <span class="stocks-covered-label">Stocks Covered:</span>
+            <span class="stocks-covered-label">Companies Covered:</span>
             <span class="stocks-covered-value">${renderStocksCovered(pick.stocksCovered)}</span>
           </p>
           <p class="pick-meta">
@@ -156,7 +156,7 @@ function renderArchive() {
                 <a href="${escapeHtml(pick.href)}">${escapeHtml(pick.title)}</a>
               </h3>
               <p class="stocks-covered-line">
-                <span class="stocks-covered-label">Stocks Covered:</span>
+                <span class="stocks-covered-label">Companies Covered:</span>
                 <span class="stocks-covered-value">${renderStocksCovered(
                   pick.stocksCovered
                 )}</span>
