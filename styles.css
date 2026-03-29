@@ -220,6 +220,10 @@ main {
   margin-bottom: 3rem;
 }
 
+body[data-page="home"] .page-intro {
+  max-width: none;
+}
+
 .page-intro--narrow,
 .page-section--narrow {
   max-width: var(--reading-width);
