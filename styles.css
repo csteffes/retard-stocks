@@ -164,24 +164,30 @@ th {
 .site-header-inner {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.3rem 0 1.45rem;
+  padding: 1rem 0 1.05rem;
 }
 
 .site-title {
   margin: 0;
-  font-family: var(--ui-font);
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 
 .site-title a {
   color: var(--text);
   text-decoration: none;
+}
+
+.site-logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-logo {
+  display: block;
+  width: min(15rem, 42vw);
+  height: auto;
 }
 
 .site-nav {
@@ -577,6 +583,10 @@ main {
   .footer-inner,
   .section-heading-row {
     align-items: flex-start;
+  }
+
+  .site-logo {
+    width: min(12rem, 58vw);
   }
 
   .meta-grid {
