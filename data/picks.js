@@ -24,7 +24,7 @@ window.PICKS = [
     href: "/picks/cuba-trade.html",
     previewMedia: {
       type: "image",
-      src: "/images/cuba-polymarket-meme.png?v=3",
+      src: "/images/cuba-polymarket-meme-horizontal.jpg?v=1",
       alt: "Polymarket Cuba intervention chart paired with the CJ 'Ah shit, here we go again' meme.",
     },
   },
