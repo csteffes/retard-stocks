@@ -1,11 +1,13 @@
 // Add new picks to the top or bottom of this array.
 // The homepage automatically shows the three most recent entries by date.
 // Every pick here should link to a hand-authored detail page in /picks.
+// Use the `stocksCovered` array for one or more tickers in the preview format.
 window.PICKS = [
   {
     slug: "nvda",
     ticker: "NVDA",
     company: "NVIDIA",
+    stocksCovered: ["NVDA"],
     date: "2026-03-21",
     classification: "Long",
     horizon: "12-24 months",
@@ -18,6 +20,7 @@ window.PICKS = [
     slug: "meta",
     ticker: "META",
     company: "Meta Platforms",
+    stocksCovered: ["META"],
     date: "2026-03-12",
     classification: "Long",
     horizon: "12-24 months",
@@ -30,6 +33,7 @@ window.PICKS = [
     slug: "tsla",
     ticker: "TSLA",
     company: "Tesla",
+    stocksCovered: ["TSLA"],
     date: "2026-02-18",
     classification: "Watchlist",
     horizon: "6-18 months",

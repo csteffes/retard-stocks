@@ -24,6 +24,14 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+function formatStocksCovered(stocksCovered) {
+  if (Array.isArray(stocksCovered) && stocksCovered.length > 0) {
+    return stocksCovered.join(", ");
+  }
+
+  return "";
+}
+
 function sortPicksDescending(items) {
   return items.sort((left, right) => parseDate(right.date) - parseDate(left.date));
 }
@@ -41,14 +49,16 @@ function renderLatestPicks() {
     .map(
       (pick) => `
         <article class="pick-card">
-          <p class="pick-card-kicker">
-            ${escapeHtml(pick.ticker)} · ${escapeHtml(pick.company)} · ${escapeHtml(
-              formatDate(pick.date)
-            )}
-          </p>
+          <p class="pick-card-kicker">${escapeHtml(formatDate(pick.date))}</p>
           <h3>
             <a href="${escapeHtml(pick.href)}">${escapeHtml(pick.title)}</a>
           </h3>
+          <p class="stocks-covered-line">
+            <span class="stocks-covered-label">Stocks Covered</span>
+            <span class="stocks-covered-value">${escapeHtml(
+              formatStocksCovered(pick.stocksCovered)
+            )}</span>
+          </p>
           <p class="pick-meta">
             <span class="tag">${escapeHtml(pick.classification)}</span>
             <span>${escapeHtml(pick.horizon)}</span>
@@ -74,19 +84,24 @@ function renderArchive() {
       (pick) => `
         <li class="archive-item">
           <article class="archive-item-row">
-            <div>
-              <p class="archive-ticker">${escapeHtml(pick.ticker)}</p>
-              <p class="archive-company">${escapeHtml(pick.company)}</p>
+            <div class="archive-date-column">
+              <p class="archive-date">${escapeHtml(formatDate(pick.date))}</p>
             </div>
-            <div>
+            <div class="archive-content">
               <h3 class="archive-title">
                 <a href="${escapeHtml(pick.href)}">${escapeHtml(pick.title)}</a>
               </h3>
+              <p class="stocks-covered-line">
+                <span class="stocks-covered-label">Stocks Covered</span>
+                <span class="stocks-covered-value">${escapeHtml(
+                  formatStocksCovered(pick.stocksCovered)
+                )}</span>
+              </p>
+              <p class="pick-meta">
+                <span class="tag">${escapeHtml(pick.classification)}</span>
+                <span>${escapeHtml(pick.horizon)}</span>
+              </p>
               <p>${escapeHtml(pick.thesis)}</p>
-            </div>
-            <div class="archive-meta">
-              <p>${escapeHtml(formatDate(pick.date))}</p>
-              <p><span class="tag">${escapeHtml(pick.classification)}</span></p>
             </div>
           </article>
         </li>

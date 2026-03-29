@@ -262,7 +262,6 @@ main {
 .section-note,
 .small-print,
 .byline,
-.archive-meta,
 .pick-meta,
 .post-pagination-label {
   color: var(--muted);
@@ -307,15 +306,28 @@ main {
   color: var(--accent);
 }
 
-.pick-card-company {
-  color: var(--muted);
-}
-
 .pick-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 0.55rem;
+}
+
+.stocks-covered-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.75rem;
+  margin-bottom: 0.6rem;
+  font-family: var(--ui-font);
+  font-size: 0.92rem;
+}
+
+.stocks-covered-label {
+  color: var(--muted);
+}
+
+.stocks-covered-value {
+  color: var(--text);
 }
 
 .tag {
@@ -331,22 +343,20 @@ main {
 
 .archive-item-row {
   display: grid;
-  grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr);
   gap: 1rem 1.4rem;
   align-items: start;
 }
 
-.archive-ticker {
-  margin-bottom: 0.1rem;
+.archive-date {
+  margin-bottom: 0;
   font-family: var(--ui-font);
-  font-size: 0.97rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
-.archive-company {
-  margin-bottom: 0;
-  color: var(--muted);
+.archive-content .pick-meta {
+  margin-bottom: 0.7rem;
 }
 
 .archive-title {
@@ -361,13 +371,6 @@ main {
 
 .archive-title a:hover {
   color: var(--accent);
-}
-
-.archive-meta {
-  min-width: 9rem;
-  text-align: right;
-  font-family: var(--ui-font);
-  font-size: 0.9rem;
 }
 
 .no-script,
@@ -539,7 +542,6 @@ main {
     grid-template-columns: 1fr;
   }
 
-  .archive-meta,
   .post-pagination-card--align-right {
     text-align: left;
   }
