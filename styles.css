@@ -424,10 +424,17 @@ main {
 }
 
 .article-lead-image img {
+  display: block;
   width: 100%;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
   background: var(--surface);
+}
+
+.article-lead-image--tight img {
+  height: clamp(18rem, 52vw, 34rem);
+  object-fit: cover;
+  object-position: center top;
 }
 
 .meta-grid {
