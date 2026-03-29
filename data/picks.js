@@ -8,6 +8,23 @@
 // for names that are not available on Robinhood.
 window.PICKS = [
   {
+    slug: "cuba-trade",
+    ticker: "CCL / SHERF / SMIZF",
+    company: "Carnival, Sherritt International, and Meliá Hotels",
+    stocksCovered: [
+      "CCL",
+      { ticker: "SHERF", quoteSource: "yahoo" },
+      { ticker: "SMIZF", quoteSource: "yahoo" },
+    ],
+    date: "2026-03-28",
+    classification: "Special Situation",
+    horizon: "3-12 months",
+    title: "Three Stocks to Trade American Intervention in Cuba",
+    thesis:
+      "A regime-change or intervention scenario in Cuba would likely reprice the trade first through a cruise line, a Cuba-exposed hotel operator, and a distressed miner-power name tied directly to the island.",
+    href: "/picks/cuba-trade.html",
+  },
+  {
     slug: "nvda",
     ticker: "NVDA",
     company: "NVIDIA",
