@@ -20,7 +20,7 @@ window.PICKS = [
     horizon: "3-12 months",
     title: "Three Stocks to Trade American Intervention in Cuba",
     thesis:
-      "A regime-change or intervention scenario in Cuba would likely reprice the trade first through a cruise line, a Cuba-exposed hotel operator, and a distressed miner-power name tied directly to the island.",
+      "Carnival, Sherritt, and Meliá offer three very different ways to express the same Cuba intervention and reopening trade, from liquid tourism exposure to a distressed on-island lottery ticket.",
     href: "/picks/cuba-trade.html",
   },
 ];
