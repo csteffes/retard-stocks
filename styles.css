@@ -415,6 +415,10 @@ main {
   margin-bottom: 2rem;
 }
 
+.article-title--compact {
+  font-size: clamp(2.05rem, 4.2vw, 3.25rem);
+}
+
 .article-lead-image {
   margin: 1.35rem 0 1.5rem;
 }
