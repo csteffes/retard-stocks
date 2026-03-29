@@ -98,8 +98,9 @@ function renderStocksCovered(stocksCovered) {
     .join(", ");
 }
 
-function renderPreviewMedia(pick) {
+function renderPreviewMedia(pick, extraClass = "") {
   const media = pick.previewMedia;
+  const mediaClassName = ["pick-card-media", extraClass].filter(Boolean).join(" ");
 
   if (!media || typeof media !== "object" || !media.src) {
     return "";
@@ -124,7 +125,7 @@ function renderPreviewMedia(pick) {
 
   return `
     <a
-      class="pick-card-media"
+      class="${escapeHtml(mediaClassName)}"
       href="${escapeHtml(pick.href)}"
       aria-label="Open ${escapeHtml(pick.title)}"
     >
@@ -168,7 +169,7 @@ function renderLatestPicks() {
               </p>
               <p>${escapeHtml(pick.thesis)}</p>
             </div>
-            ${renderPreviewMedia(pick)}
+            ${renderPreviewMedia(pick, "pick-card-media--feature")}
           </div>
         </article>
       `
@@ -189,7 +190,7 @@ function renderArchive() {
     .map(
       (pick) => `
         <li class="archive-item">
-          <article class="archive-item-row">
+          <article class="archive-item-row${pick.previewMedia ? " archive-item-row--with-media" : ""}">
             <div class="archive-date-column">
               <p class="archive-date">${escapeHtml(formatDate(pick.date))}</p>
             </div>
@@ -209,6 +210,7 @@ function renderArchive() {
               </p>
               <p>${escapeHtml(pick.thesis)}</p>
             </div>
+            ${renderPreviewMedia(pick, "archive-item-media")}
           </article>
         </li>
       `
