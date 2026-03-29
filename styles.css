@@ -11,7 +11,7 @@
   --serif-font: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia,
     serif;
   --max-width: 75rem;
-  --reading-width: 44rem;
+  --reading-width: 47rem;
 }
 
 *,
@@ -432,7 +432,7 @@ main {
 }
 
 .article-lead-image--tight img {
-  height: clamp(18rem, 52vw, 34rem);
+  height: clamp(22rem, 60vw, 42rem);
   object-fit: cover;
   object-position: center top;
 }
