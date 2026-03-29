@@ -2,11 +2,13 @@
 
 <!-- Keep the title sharp, specific, and non-promotional. -->
 
-**Ticker:** [TICKER]  
-**Company:** [COMPANY]  
-**Date:** [Month Day, Year]  
+**Ticker:** [$TICKER]([ROBINHOOD_OR_YAHOO_QUOTE_URL])  
+**Company:** [COMPANY]([OFFICIAL_COMPANY_WEBSITE_URL])  
+**Publish Date:** [Month Day, Year]  
 **Classification:** [Long / Short / Watchlist / Special Situation]  
 **Time horizon:** [6-12 months / 12-24 months / other]
+
+<!-- For multi-stock posts, use a plural label and list each ticker with its own quote URL. -->
 
 ## Quick take
 

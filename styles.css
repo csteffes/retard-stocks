@@ -340,6 +340,16 @@ main {
   text-decoration-thickness: 0.12em;
 }
 
+.company-site-link {
+  color: var(--text);
+  text-decoration-color: rgba(22, 21, 19, 0.24);
+}
+
+.company-site-link:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
 .tag {
   display: inline-flex;
   align-items: center;

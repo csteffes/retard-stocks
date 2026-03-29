@@ -64,6 +64,7 @@ Output requirements:
 Input block:
 - Company: [COMPANY]
 - Ticker: [TICKER]
+- Official company website: [COMPANY_WEBSITE]
 - Current price: [CURRENT_PRICE or "unknown"]
 - Market cap: [MARKET_CAP or "unknown"]
 - Classification: [Long / Short / Watchlist / Special Situation]
@@ -78,9 +79,9 @@ Now write the memo in this exact format:
 
 # [TICKER] — [Clear, non-hyped title]
 
-**Ticker:** [TICKER]  
-**Company:** [COMPANY]  
-**Date:** [Month Day, Year]  
+**Ticker:** [$TICKER](Use Robinhood quote URL for standard tickers; use Yahoo Finance quote URL when Robinhood is unavailable)  
+**Company:** [COMPANY]([COMPANY_WEBSITE])  
+**Publish Date:** [Month Day, Year]  
 **Classification:** [CLASSIFICATION]  
 **Time horizon:** [TIME_HORIZON]
 

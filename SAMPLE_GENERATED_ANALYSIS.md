@@ -1,8 +1,8 @@
 # CPRT — A quiet compounder with unusually durable economics
 
-**Ticker:** CPRT  
-**Company:** Copart  
-**Date:** March 28, 2026  
+**Ticker:** [$CPRT](https://robinhood.com/us/en/stocks/CPRT/)  
+**Company:** [Copart](https://www.copart.com/)  
+**Publish Date:** March 28, 2026  
 **Classification:** Long  
 **Time horizon:** 12-24 months
 
