@@ -415,6 +415,17 @@ main {
   margin-bottom: 2rem;
 }
 
+.article-lead-image {
+  margin: 1.35rem 0 1.5rem;
+}
+
+.article-lead-image img {
+  width: 100%;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--surface);
+}
+
 .meta-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
