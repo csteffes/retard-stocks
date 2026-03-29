@@ -134,6 +134,16 @@ function renderPreviewMedia(pick, extraClass = "") {
   `;
 }
 
+function renderEntryCta(pick) {
+  return `
+    <p class="entry-cta">
+      <a class="entry-cta-link" href="${escapeHtml(pick.href)}">
+        Read Full Memo
+      </a>
+    </p>
+  `;
+}
+
 function sortPicksDescending(items) {
   return items.sort((left, right) => parseDate(right.date) - parseDate(left.date));
 }
@@ -168,6 +178,7 @@ function renderLatestPicks() {
                 <span>${escapeHtml(pick.horizon)}</span>
               </p>
               <p>${escapeHtml(pick.thesis)}</p>
+              ${renderEntryCta(pick)}
             </div>
             ${renderPreviewMedia(pick, "pick-card-media--feature")}
           </div>
@@ -209,6 +220,7 @@ function renderArchive() {
                 <span>${escapeHtml(pick.horizon)}</span>
               </p>
               <p>${escapeHtml(pick.thesis)}</p>
+              ${renderEntryCta(pick)}
             </div>
             ${renderPreviewMedia(pick, "archive-item-media")}
           </article>

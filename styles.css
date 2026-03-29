@@ -345,6 +345,36 @@ body[data-page="home"] .page-intro {
   margin-bottom: 0.55rem;
 }
 
+.entry-cta {
+  margin: 1rem 0 0;
+}
+
+.entry-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--ui-font);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  padding-bottom: 0.12rem;
+  transition: color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.entry-cta-link::after {
+  content: "\2192";
+  font-size: 0.96em;
+  transform: translateY(-0.02em);
+}
+
+.entry-cta-link:hover {
+  color: var(--text);
+  border-color: currentColor;
+  transform: translateX(1px);
+}
+
 .stocks-covered-line {
   display: flex;
   flex-wrap: wrap;
