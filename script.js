@@ -124,6 +124,7 @@ function renderLatestPicks() {
             <span class="stocks-covered-value">${renderStocksCovered(pick.stocksCovered)}</span>
           </p>
           <p class="pick-meta">
+            <span class="stocks-covered-label">Hold Period:</span>
             <span>${escapeHtml(pick.horizon)}</span>
           </p>
           <p>${escapeHtml(pick.thesis)}</p>
@@ -161,6 +162,7 @@ function renderArchive() {
                 )}</span>
               </p>
               <p class="pick-meta">
+                <span class="stocks-covered-label">Hold Period:</span>
                 <span>${escapeHtml(pick.horizon)}</span>
               </p>
               <p>${escapeHtml(pick.thesis)}</p>
