@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200, initial-scale=1.0" />
+    <title>Retard Stocks Social Preview</title>
+    <style>
+      :root {
+        --bg: #f8f6f1;
+        --surface: #fffdf9;
+        --line: #d8d1c7;
+        --text: #161513;
+        --muted: #635f58;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text);
+      }
+
+      .card {
+        width: 1112px;
+        height: 542px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: linear-gradient(180deg, #fffefb 0%, #f7f3ec 100%);
+        box-shadow: 0 14px 32px rgba(22, 21, 19, 0.08);
+        display: grid;
+        grid-template-rows: 1fr auto;
+        padding: 46px 48px 38px;
+      }
+
+      .logo-wrap {
+        display: grid;
+        place-items: center;
+      }
+
+      .logo {
+        width: 880px;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .footer {
+        padding-top: 28px;
+        border-top: 1px solid rgba(216, 209, 199, 0.95);
+        display: grid;
+        gap: 10px;
+        justify-items: center;
+      }
+
+      .tagline {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+        color: var(--muted);
+      }
+
+      .domain {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #8a857d;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card" aria-label="Retard Stocks share preview">
+      <div class="logo-wrap">
+        <img class="logo" src="logo.svg" alt="Retard Stocks" />
+      </div>
+      <div class="footer">
+        <p class="tagline">To make retarded money, pick retarded stocks</p>
+        <p class="domain">retardstocks.com</p>
+      </div>
+    </main>
+  </body>
+</html>
