@@ -507,6 +507,24 @@ main {
   border-left: 3px solid var(--accent);
 }
 
+.callout-heading {
+  margin-bottom: 0.35rem;
+  font-family: var(--ui-font);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.callout-list {
+  margin: 0.85rem 0 1rem;
+  padding-left: 1.1rem;
+}
+
+.callout-list li {
+  margin-bottom: 0.5rem;
+}
+
 .table-wrap {
   overflow-x: auto;
   margin: 1.25rem 0 1.75rem;
