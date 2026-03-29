@@ -22,9 +22,7 @@ This project is intentionally simple:
 │   └── picks.js
 ├── index.html
 ├── picks/
-│   ├── meta.html
-│   ├── nvda.html
-│   └── tsla.html
+│   └── cuba-trade.html
 ├── PROMPT_STOCK_ANALYSIS.md
 ├── README.md
 ├── SAMPLE_GENERATED_ANALYSIS.md
@@ -35,7 +33,7 @@ This project is intentionally simple:
 
 ## How to add a new pick
 
-1. Duplicate one of the existing files in `/picks`, rename it, and update the page title, `body` `data-pick` value, metadata row, and article content.
+1. Duplicate the existing file in `/picks`, rename it, and update the page title, `body` `data-pick` value, metadata row, and article content.
 2. Add a new object to `data/picks.js` with:
    - `slug`
    - `ticker`
