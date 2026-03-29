@@ -330,6 +330,16 @@ main {
   color: var(--text);
 }
 
+.stock-quote-link {
+  color: var(--accent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+}
+
+.stock-quote-link:hover {
+  text-decoration-thickness: 0.12em;
+}
+
 .tag {
   display: inline-flex;
   align-items: center;

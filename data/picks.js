@@ -2,6 +2,10 @@
 // The homepage automatically shows the three most recent entries by date.
 // Every pick here should link to a hand-authored detail page in /picks.
 // Use the `stocksCovered` array for one or more tickers in the preview format.
+// Each entry can be a simple ticker string like "META" or an object:
+// { ticker: "XYZ", quoteSource: "yahoo", quoteTicker: "XYZ" }
+// Standard tickers default to Robinhood links. Use `quoteSource: "yahoo"`
+// for names that are not available on Robinhood.
 window.PICKS = [
   {
     slug: "nvda",

@@ -24,12 +24,78 @@ function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
-function formatStocksCovered(stocksCovered) {
-  if (Array.isArray(stocksCovered) && stocksCovered.length > 0) {
-    return stocksCovered.join(", ");
+function normalizeStock(stock) {
+  if (typeof stock === "string") {
+    return {
+      ticker: stock.trim().toUpperCase(),
+    };
   }
 
-  return "";
+  if (stock && typeof stock === "object" && typeof stock.ticker === "string") {
+    return {
+      ticker: stock.ticker.trim().toUpperCase(),
+      quoteSource: stock.quoteSource,
+      quoteTicker: typeof stock.quoteTicker === "string" ? stock.quoteTicker.trim() : "",
+      quoteUrl: typeof stock.quoteUrl === "string" ? stock.quoteUrl.trim() : "",
+    };
+  }
+
+  return null;
+}
+
+function buildRobinhoodQuoteUrl(ticker) {
+  return `https://robinhood.com/us/en/stocks/${encodeURIComponent(ticker)}/`;
+}
+
+function buildYahooQuoteUrl(ticker) {
+  return `https://finance.yahoo.com/quote/${encodeURIComponent(ticker)}/`;
+}
+
+function shouldDefaultToYahoo(ticker) {
+  return !/^[A-Z]{1,5}$/.test(ticker);
+}
+
+function getQuoteUrl(stock) {
+  if (stock.quoteUrl) {
+    return stock.quoteUrl;
+  }
+
+  const quoteTicker = stock.quoteTicker || stock.ticker;
+
+  if (stock.quoteSource === "yahoo") {
+    return buildYahooQuoteUrl(quoteTicker);
+  }
+
+  if (stock.quoteSource === "robinhood") {
+    return buildRobinhoodQuoteUrl(quoteTicker);
+  }
+
+  return shouldDefaultToYahoo(stock.ticker)
+    ? buildYahooQuoteUrl(quoteTicker)
+    : buildRobinhoodQuoteUrl(quoteTicker);
+}
+
+function renderStocksCovered(stocksCovered) {
+  if (!Array.isArray(stocksCovered) || stocksCovered.length === 0) {
+    return "";
+  }
+
+  return stocksCovered
+    .map(normalizeStock)
+    .filter(Boolean)
+    .map(
+      (stock) => `
+        <a
+          class="stock-quote-link"
+          href="${escapeHtml(getQuoteUrl(stock))}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          $${escapeHtml(stock.ticker)}
+        </a>
+      `
+    )
+    .join(", ");
 }
 
 function sortPicksDescending(items) {
@@ -54,10 +120,8 @@ function renderLatestPicks() {
             <a href="${escapeHtml(pick.href)}">${escapeHtml(pick.title)}</a>
           </h3>
           <p class="stocks-covered-line">
-            <span class="stocks-covered-label">Stocks Covered</span>
-            <span class="stocks-covered-value">${escapeHtml(
-              formatStocksCovered(pick.stocksCovered)
-            )}</span>
+            <span class="stocks-covered-label">Stocks Covered:</span>
+            <span class="stocks-covered-value">${renderStocksCovered(pick.stocksCovered)}</span>
           </p>
           <p class="pick-meta">
             <span class="tag">${escapeHtml(pick.classification)}</span>
@@ -92,9 +156,9 @@ function renderArchive() {
                 <a href="${escapeHtml(pick.href)}">${escapeHtml(pick.title)}</a>
               </h3>
               <p class="stocks-covered-line">
-                <span class="stocks-covered-label">Stocks Covered</span>
-                <span class="stocks-covered-value">${escapeHtml(
-                  formatStocksCovered(pick.stocksCovered)
+                <span class="stocks-covered-label">Stocks Covered:</span>
+                <span class="stocks-covered-value">${renderStocksCovered(
+                  pick.stocksCovered
                 )}</span>
               </p>
               <p class="pick-meta">
