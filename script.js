@@ -320,6 +320,16 @@ function formatChartValue(value, chart) {
   return `${affixes.prefix}${formatted}${affixes.suffix}`;
 }
 
+function formatValueWithAffixes(value, options = {}) {
+  const {
+    decimals = 0,
+    prefix = "",
+    suffix = "",
+  } = options;
+
+  return `${prefix}${formatChartNumber(value, decimals)}${suffix}`;
+}
+
 function createNiceNumber(range, shouldRound) {
   const exponent = Math.floor(Math.log10(range));
   const fraction = range / 10 ** exponent;
@@ -400,6 +410,601 @@ function buildSmoothPath(points) {
   }
 
   return path;
+}
+
+function positionFloatingTooltip(tooltip, stage, point, dimensions) {
+  const { svgWidth, svgHeight } = dimensions;
+  const stageWidth = stage.clientWidth;
+  const stageHeight = stage.clientHeight;
+  const tooltipWidth = tooltip.offsetWidth || 120;
+  const tooltipHeight = tooltip.offsetHeight || 70;
+  const left = clamp(
+    (point.x / svgWidth) * stageWidth,
+    tooltipWidth / 2 + 8,
+    stageWidth - tooltipWidth / 2 - 8
+  );
+  const top = clamp(
+    (point.y / svgHeight) * stageHeight,
+    tooltipHeight + 12,
+    stageHeight - 18
+  );
+
+  tooltip.style.left = `${left}px`;
+  tooltip.style.top = `${top}px`;
+}
+
+function renderMetricList(metrics, valueClassName = "") {
+  return (Array.isArray(metrics) ? metrics : [])
+    .map(
+      (metric) => `
+        <div class="macro-chart-stat">
+          <span class="macro-chart-stat-label">${escapeHtml(metric.label)}</span>
+          <span class="macro-chart-stat-value ${valueClassName}">
+            ${escapeHtml(metric.value)}
+          </span>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderMacroNotes(notes) {
+  return `
+    <div class="macro-chart-notes">
+      ${(Array.isArray(notes) ? notes : [])
+        .map(
+          (note) => `
+            <span><strong>${escapeHtml(note.label)}</strong> ${escapeHtml(note.text)}</span>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function getMacroLabelIndexes(chart, points) {
+  if (Array.isArray(chart.xLabelIndexes) && chart.xLabelIndexes.length > 0) {
+    return new Set(chart.xLabelIndexes);
+  }
+
+  return new Set(points.map((_, index) => index));
+}
+
+function formatMacroAxisValue(value, chart) {
+  return formatValueWithAffixes(value, {
+    decimals: chart.axisDecimals ?? 0,
+    prefix: chart.axisPrefix || "",
+    suffix: chart.axisSuffix || "",
+  });
+}
+
+function formatMacroTooltipValue(value, chart) {
+  return formatValueWithAffixes(value, {
+    decimals: chart.tooltipDecimals ?? chart.axisDecimals ?? 0,
+    prefix: chart.tooltipPrefix ?? chart.axisPrefix ?? "",
+    suffix: chart.tooltipSuffix ?? chart.axisSuffix ?? "",
+  });
+}
+
+function renderMacroLineChart(container, chart) {
+  const svgWidth = chart.compact ? 820 : 840;
+  const svgHeight = chart.compact ? 312 : 336;
+  const chartLeft = 60;
+  const chartTop = 24;
+  const chartWidth = svgWidth - chartLeft - 30;
+  const chartHeight = chart.compact ? 176 : 206;
+  const chartBottom = chartTop + chartHeight;
+  const chartRight = chartLeft + chartWidth;
+  const rawPoints = Array.isArray(chart.points) ? chart.points : [];
+  const series = Array.isArray(chart.series) ? chart.series : [];
+
+  if (rawPoints.length === 0 || series.length === 0) {
+    return;
+  }
+
+  const values = rawPoints.flatMap((point) =>
+    series
+      .map((entry) => Number(point[entry.key]))
+      .filter((value) => Number.isFinite(value))
+  );
+
+  if (values.length === 0) {
+    return;
+  }
+
+  const scale = createNiceScale(Math.min(...values), Math.max(...values), 5);
+  const yTicks = Array.from({ length: 5 }, (_, index) => {
+    const ratio = index / 4;
+    const value = scale.max - (scale.max - scale.min) * ratio;
+    const y = chartTop + chartHeight * ratio;
+
+    return { value, y };
+  });
+
+  const plottedSeries = series.map((seriesEntry) => ({
+    ...seriesEntry,
+    points: rawPoints.map((point, index) => {
+      const ratioX = index / (rawPoints.length - 1 || 1);
+      const value = Number(point[seriesEntry.key]);
+      const ratioY = (value - scale.min) / (scale.max - scale.min || 1);
+
+      return {
+        label: point.label,
+        event: point.event,
+        value,
+        x: chartLeft + chartWidth * ratioX,
+        y: chartBottom - chartHeight * ratioY,
+      };
+    }),
+  }));
+
+  const primarySeries = plottedSeries[0];
+  const primaryLinePath = buildSmoothPath(primarySeries.points);
+  const primaryAreaPath = `${primaryLinePath} L ${chartRight} ${chartBottom} L ${chartLeft} ${chartBottom} Z`;
+  const visibleLabelIndexes = getMacroLabelIndexes(chart, primarySeries.points);
+
+  container.style.setProperty("--macro-chart-line", chart.accent || "#274762");
+  container.style.setProperty(
+    "--macro-chart-fill",
+    hexToRgba(chart.accent || "#274762", 0.11)
+  );
+  container.style.setProperty(
+    "--macro-chart-secondary-line",
+    chart.secondaryAccent || "#a0665d"
+  );
+
+  container.innerHTML = `
+    <div class="macro-chart-meta">
+      <div class="macro-chart-heading">
+        <h3>${escapeHtml(chart.title)}</h3>
+        <p class="macro-chart-summary">${escapeHtml(chart.summary)}</p>
+      </div>
+      <div class="macro-chart-stats">
+        ${renderMetricList(chart.metrics)}
+      </div>
+    </div>
+    <div class="macro-chart-stage">
+      <div class="macro-chart-tooltip" aria-hidden="true"></div>
+      <svg
+        class="macro-chart-svg"
+        viewBox="0 0 ${svgWidth} ${svgHeight}"
+        role="img"
+        aria-label="${escapeHtml(chart.title)} interactive chart"
+      >
+        ${yTicks
+          .map(
+            (tick) => `
+              <line
+                class="macro-chart-gridline"
+                x1="${chartLeft}"
+                y1="${tick.y.toFixed(1)}"
+                x2="${chartRight}"
+                y2="${tick.y.toFixed(1)}"
+              />
+              <text
+                class="macro-chart-y-label"
+                x="${chartLeft - 12}"
+                y="${(tick.y + 5.5).toFixed(1)}"
+                text-anchor="end"
+              >
+                ${escapeHtml(formatMacroAxisValue(tick.value, chart))}
+              </text>
+            `
+          )
+          .join("")}
+        ${primarySeries.points
+          .map(
+            (point) => `
+              <line
+                class="macro-chart-gridline macro-chart-gridline--vertical"
+                x1="${point.x.toFixed(1)}"
+                y1="${chartTop}"
+                x2="${point.x.toFixed(1)}"
+                y2="${chartBottom}"
+              />
+            `
+          )
+          .join("")}
+        <line
+          class="macro-chart-axis-line"
+          x1="${chartLeft}"
+          y1="${chartBottom}"
+          x2="${chartRight}"
+          y2="${chartBottom}"
+        />
+        <path class="macro-chart-area" d="${primaryAreaPath}" />
+        ${plottedSeries
+          .map(
+            (seriesEntry, index) => `
+              <path
+                class="macro-chart-line ${index > 0 ? "macro-chart-line--secondary" : ""} ${
+                  seriesEntry.dashed ? "macro-chart-line--dashed" : ""
+                }"
+                d="${buildSmoothPath(seriesEntry.points)}"
+                ${seriesEntry.color ? `style="--series-color: ${seriesEntry.color};"` : ""}
+              />
+            `
+          )
+          .join("")}
+        ${primarySeries.points
+          .filter((point) => point.event)
+          .map(
+            (point) => `
+              <circle
+                class="macro-chart-event-dot"
+                cx="${point.x.toFixed(1)}"
+                cy="${point.y.toFixed(1)}"
+                r="6"
+              />
+            `
+          )
+          .join("")}
+        ${primarySeries.points
+          .map((point, index) =>
+            visibleLabelIndexes.has(index)
+              ? `
+                <text
+                  class="macro-chart-x-label"
+                  x="${point.x.toFixed(1)}"
+                  y="${chartBottom + 28}"
+                  text-anchor="middle"
+                >
+                  ${escapeHtml(point.label)}
+                </text>
+              `
+              : ""
+          )
+          .join("")}
+        <line
+          class="macro-chart-hover-line"
+          x1="0"
+          y1="${chartTop}"
+          x2="0"
+          y2="${chartBottom}"
+        />
+        <circle class="macro-chart-hover-dot macro-chart-hover-dot--primary" cx="0" cy="0" r="6.8" />
+        ${
+          plottedSeries[1]
+            ? '<circle class="macro-chart-hover-dot macro-chart-hover-dot--secondary" cx="0" cy="0" r="6.1" />'
+            : ""
+        }
+        <rect
+          class="macro-chart-hitbox"
+          x="${chartLeft}"
+          y="${chartTop}"
+          width="${chartWidth}"
+          height="${chartHeight}"
+        />
+      </svg>
+    </div>
+    ${renderMacroNotes(chart.notes)}
+  `;
+
+  const stage = container.querySelector(".macro-chart-stage");
+  const tooltip = container.querySelector(".macro-chart-tooltip");
+  const hoverLine = container.querySelector(".macro-chart-hover-line");
+  const hoverDots = Array.from(container.querySelectorAll(".macro-chart-hover-dot"));
+  const hitbox = container.querySelector(".macro-chart-hitbox");
+  let activeIndex = -1;
+
+  function setActivePoint(index) {
+    const currentPrimaryPoint = primarySeries.points[index];
+
+    if (!currentPrimaryPoint) {
+      hoverLine.style.opacity = "0";
+      hoverDots.forEach((dot) => {
+        dot.style.opacity = "0";
+      });
+      tooltip.classList.remove("is-visible");
+      activeIndex = -1;
+      return;
+    }
+
+    activeIndex = index;
+    const tooltipRows = plottedSeries
+      .map((seriesEntry) => {
+        const point = seriesEntry.points[index];
+
+        if (!point) {
+          return "";
+        }
+
+        return `
+          <div class="macro-chart-tooltip-row">
+            <span
+              class="macro-chart-tooltip-swatch"
+              style="background:${escapeHtml(seriesEntry.color || chart.accent || "#274762")}"
+            ></span>
+            <span class="macro-chart-tooltip-series">${escapeHtml(seriesEntry.label)}</span>
+            <span class="macro-chart-tooltip-value">${escapeHtml(
+              formatMacroTooltipValue(point.value, chart)
+            )}</span>
+          </div>
+        `;
+      })
+      .join("");
+
+    hoverLine.setAttribute("x1", currentPrimaryPoint.x.toFixed(1));
+    hoverLine.setAttribute("x2", currentPrimaryPoint.x.toFixed(1));
+    hoverLine.style.opacity = "1";
+
+    hoverDots.forEach((dot, seriesIndex) => {
+      const point = plottedSeries[seriesIndex]?.points[index];
+
+      if (!point) {
+        dot.style.opacity = "0";
+        return;
+      }
+
+      dot.setAttribute("cx", point.x.toFixed(1));
+      dot.setAttribute("cy", point.y.toFixed(1));
+      dot.style.opacity = "1";
+    });
+
+    tooltip.innerHTML = `
+      <div class="macro-chart-tooltip-label">${escapeHtml(currentPrimaryPoint.label)}</div>
+      <div class="macro-chart-tooltip-list">${tooltipRows}</div>
+      ${
+        currentPrimaryPoint.event
+          ? `<div class="macro-chart-tooltip-event">${escapeHtml(currentPrimaryPoint.event)}</div>`
+          : ""
+      }
+    `;
+    tooltip.classList.add("is-visible");
+
+    const anchorY = Math.min(...plottedSeries.map((seriesEntry) => seriesEntry.points[index].y));
+    positionFloatingTooltip(
+      tooltip,
+      stage,
+      { x: currentPrimaryPoint.x, y: anchorY },
+      { svgWidth, svgHeight }
+    );
+  }
+
+  function handlePointerMove(event) {
+    const bounds = hitbox.getBoundingClientRect();
+    const ratio = clamp((event.clientX - bounds.left) / bounds.width, 0, 1);
+    const targetX = chartLeft + chartWidth * ratio;
+    let nearestIndex = 0;
+    let smallestDistance = Number.POSITIVE_INFINITY;
+
+    primarySeries.points.forEach((point, index) => {
+      const distance = Math.abs(point.x - targetX);
+
+      if (distance < smallestDistance) {
+        smallestDistance = distance;
+        nearestIndex = index;
+      }
+    });
+
+    if (nearestIndex !== activeIndex) {
+      setActivePoint(nearestIndex);
+    }
+  }
+
+  hitbox.addEventListener("pointermove", handlePointerMove);
+  hitbox.addEventListener("pointerdown", handlePointerMove);
+  hitbox.addEventListener("pointerleave", () => setActivePoint(-1));
+}
+
+function renderMacroBarChart(container, chart) {
+  const svgWidth = 820;
+  const svgHeight = 312;
+  const chartLeft = 60;
+  const chartTop = 24;
+  const chartWidth = svgWidth - chartLeft - 30;
+  const chartHeight = 176;
+  const chartBottom = chartTop + chartHeight;
+  const chartRight = chartLeft + chartWidth;
+  const rawPoints = Array.isArray(chart.points) ? chart.points : [];
+
+  if (rawPoints.length === 0) {
+    return;
+  }
+
+  const values = rawPoints.map((point) => Number(point.value)).filter((value) => Number.isFinite(value));
+  const scale = createNiceScale(0, Math.max(...values), 5);
+  const yTicks = Array.from({ length: 5 }, (_, index) => {
+    const ratio = index / 4;
+    const value = scale.max - (scale.max - scale.min) * ratio;
+    const y = chartTop + chartHeight * ratio;
+
+    return { value, y };
+  });
+
+  const step = chartWidth / rawPoints.length;
+  const barWidth = Math.min(56, step * 0.58);
+  const bars = rawPoints.map((point, index) => {
+    const value = Number(point.value);
+    const ratioY = (value - scale.min) / (scale.max - scale.min || 1);
+    const height = chartHeight * ratioY;
+    const x = chartLeft + step * index + (step - barWidth) / 2;
+    const y = chartBottom - height;
+
+    return {
+      ...point,
+      value,
+      width: barWidth,
+      x,
+      y,
+      height,
+    };
+  });
+
+  const visibleLabelIndexes = getMacroLabelIndexes(chart, bars);
+
+  container.style.setProperty("--macro-chart-line", chart.accent || "#274762");
+
+  container.innerHTML = `
+    <div class="macro-chart-meta">
+      <div class="macro-chart-heading">
+        <h3>${escapeHtml(chart.title)}</h3>
+        <p class="macro-chart-summary">${escapeHtml(chart.summary)}</p>
+      </div>
+      <div class="macro-chart-stats">
+        ${renderMetricList(chart.metrics)}
+      </div>
+    </div>
+    <div class="macro-chart-stage">
+      <div class="macro-chart-tooltip" aria-hidden="true"></div>
+      <svg
+        class="macro-chart-svg"
+        viewBox="0 0 ${svgWidth} ${svgHeight}"
+        role="img"
+        aria-label="${escapeHtml(chart.title)} interactive chart"
+      >
+        ${yTicks
+          .map(
+            (tick) => `
+              <line
+                class="macro-chart-gridline"
+                x1="${chartLeft}"
+                y1="${tick.y.toFixed(1)}"
+                x2="${chartRight}"
+                y2="${tick.y.toFixed(1)}"
+              />
+              <text
+                class="macro-chart-y-label"
+                x="${chartLeft - 12}"
+                y="${(tick.y + 5.5).toFixed(1)}"
+                text-anchor="end"
+              >
+                ${escapeHtml(formatMacroAxisValue(tick.value, chart))}
+              </text>
+            `
+          )
+          .join("")}
+        <line
+          class="macro-chart-axis-line"
+          x1="${chartLeft}"
+          y1="${chartBottom}"
+          x2="${chartRight}"
+          y2="${chartBottom}"
+        />
+        ${bars
+          .map(
+            (bar) => `
+              <rect
+                class="macro-chart-bar macro-chart-bar--${escapeHtml(bar.tone || "base")}"
+                x="${bar.x.toFixed(1)}"
+                y="${bar.y.toFixed(1)}"
+                width="${bar.width.toFixed(1)}"
+                height="${bar.height.toFixed(1)}"
+                rx="6"
+              />
+            `
+          )
+          .join("")}
+        <rect class="macro-chart-bar-hover" x="0" y="0" width="0" height="0" rx="6" />
+        ${bars
+          .map((bar, index) =>
+            visibleLabelIndexes.has(index)
+              ? `
+                <text
+                  class="macro-chart-x-label"
+                  x="${(bar.x + bar.width / 2).toFixed(1)}"
+                  y="${chartBottom + 28}"
+                  text-anchor="middle"
+                >
+                  ${escapeHtml(bar.label)}
+                </text>
+              `
+              : ""
+          )
+          .join("")}
+        ${bars
+          .map(
+            (bar, index) => `
+              <rect
+                class="macro-chart-hitbox"
+                data-bar-index="${index}"
+                x="${(bar.x - (step - bar.width) / 2).toFixed(1)}"
+                y="${chartTop}"
+                width="${step.toFixed(1)}"
+                height="${chartHeight}"
+              />
+            `
+          )
+          .join("")}
+      </svg>
+    </div>
+    ${renderMacroNotes(chart.notes)}
+  `;
+
+  const stage = container.querySelector(".macro-chart-stage");
+  const tooltip = container.querySelector(".macro-chart-tooltip");
+  const hoverBar = container.querySelector(".macro-chart-bar-hover");
+  const hitboxes = Array.from(container.querySelectorAll(".macro-chart-hitbox"));
+  let activeIndex = -1;
+
+  function setActiveBar(index) {
+    const bar = bars[index];
+
+    if (!bar) {
+      hoverBar.style.opacity = "0";
+      tooltip.classList.remove("is-visible");
+      activeIndex = -1;
+      return;
+    }
+
+    activeIndex = index;
+    hoverBar.setAttribute("x", bar.x.toFixed(1));
+    hoverBar.setAttribute("y", bar.y.toFixed(1));
+    hoverBar.setAttribute("width", bar.width.toFixed(1));
+    hoverBar.setAttribute("height", bar.height.toFixed(1));
+    hoverBar.style.opacity = "1";
+
+    tooltip.innerHTML = `
+      <div class="macro-chart-tooltip-label">${escapeHtml(bar.label)}</div>
+      <div class="macro-chart-tooltip-list">
+        <div class="macro-chart-tooltip-row">
+          <span class="macro-chart-tooltip-swatch macro-chart-tooltip-swatch--solid"></span>
+          <span class="macro-chart-tooltip-series">Grid Failure</span>
+          <span class="macro-chart-tooltip-value">${escapeHtml(
+            formatMacroTooltipValue(bar.value, chart)
+          )}</span>
+        </div>
+      </div>
+      ${
+        bar.event
+          ? `<div class="macro-chart-tooltip-event">${escapeHtml(bar.event)}</div>`
+          : ""
+      }
+    `;
+    tooltip.classList.add("is-visible");
+
+    positionFloatingTooltip(
+      tooltip,
+      stage,
+      { x: bar.x + bar.width / 2, y: Math.max(chartTop + 18, bar.y) },
+      { svgWidth, svgHeight }
+    );
+  }
+
+  hitboxes.forEach((hitbox) => {
+    const index = Number(hitbox.dataset.barIndex);
+
+    hitbox.addEventListener("pointermove", () => {
+      if (index !== activeIndex) {
+        setActiveBar(index);
+      }
+    });
+    hitbox.addEventListener("pointerdown", () => setActiveBar(index));
+  });
+  stage.addEventListener("pointerleave", () => setActiveBar(-1));
+}
+
+function renderMacroChartCard(container, chart) {
+  if (!chart || typeof chart !== "object") {
+    return;
+  }
+
+  if (chart.type === "bar") {
+    renderMacroBarChart(container, chart);
+    return;
+  }
+
+  renderMacroLineChart(container, chart);
 }
 
 function renderStockChartCard(container, chart) {
@@ -680,6 +1285,23 @@ function renderStockCharts() {
   });
 }
 
+function renderMacroCharts() {
+  const chartData = parseJsonScript("macro-chart-data");
+
+  if (!chartData) {
+    return;
+  }
+
+  document.querySelectorAll(".js-macro-chart[data-chart-id]").forEach((container) => {
+    const chartId = container.dataset.chartId;
+    const chart = chartData[chartId];
+
+    if (chart) {
+      renderMacroChartCard(container, chart);
+    }
+  });
+}
+
 function renderPostPagination() {
   const container = document.querySelector("[data-post-pagination]");
   const currentSlug = document.body.dataset.pick;
@@ -728,4 +1350,5 @@ renderLatestPicks();
 renderArchive();
 renderPostPagination();
 applyPrettyUrl();
+renderMacroCharts();
 renderStockCharts();
