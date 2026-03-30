@@ -560,88 +560,154 @@
 
         <section>
           <h2>Quick Comparison</h2>
-          <div class="comparison-grid" aria-label="Quick comparison of the three securities">
-            <article class="comparison-card comparison-card--carnival">
-              <div class="comparison-card-header">
-                <h3 class="comparison-card-title">
-                  <a
-                    class="stock-quote-link"
-                    href="https://robinhood.com/us/en/stocks/CCL/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >$CCL</a
-                  >
-                </h3>
-                <p class="comparison-card-kicker">Liquid Proxy</p>
+          <div class="comparison-board comparison-board--desktop" aria-label="Quick comparison matrix">
+            <div class="comparison-matrix">
+              <div class="comparison-corner" aria-hidden="true"></div>
+
+              <div class="comparison-header comparison-header--carnival">
+                <a
+                  class="comparison-badge comparison-badge--carnival stock-quote-link"
+                  href="https://robinhood.com/us/en/stocks/CCL/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >$CCL</a
+                >
+                <p class="comparison-header-subtitle">Liquid Proxy</p>
               </div>
-              <dl class="comparison-card-list">
-                <div class="comparison-card-item">
-                  <dt>What It Really Is</dt>
+
+              <div class="comparison-header comparison-header--sherritt">
+                <a
+                  class="comparison-badge comparison-badge--sherritt stock-quote-link"
+                  href="https://finance.yahoo.com/quote/SHERF/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >$SHERF</a
+                >
+                <p class="comparison-header-subtitle">High-Volatility Beta</p>
+              </div>
+
+              <div class="comparison-header comparison-header--melia">
+                <a
+                  class="comparison-badge comparison-badge--melia stock-quote-link"
+                  href="https://finance.yahoo.com/quote/SMIZF/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >$SMIZF</a
+                >
+                <p class="comparison-header-subtitle">Asset Scarcity Angle</p>
+              </div>
+
+              <div class="comparison-row-label">What It Is</div>
+              <div class="comparison-cell comparison-cell--carnival">
+                Liquid tourism and reopening proxy
+              </div>
+              <div class="comparison-cell comparison-cell--sherritt">
+                Distressed pure-play Cuba asset
+              </div>
+              <div class="comparison-cell comparison-cell--melia">
+                Existing hotel footprint already on the island
+              </div>
+
+              <div class="comparison-row-label">Best Edge</div>
+              <div class="comparison-cell comparison-cell--carnival">
+                Deep options market and proven Cuba route economics
+              </div>
+              <div class="comparison-cell comparison-cell--sherritt">
+                Highest direct upside if the island reopens
+              </div>
+              <div class="comparison-cell comparison-cell--melia">
+                Hard-asset scarcity with lower business fragility
+              </div>
+
+              <div class="comparison-row-label">Main Risk</div>
+              <div class="comparison-cell comparison-cell--carnival">
+                Fuel sensitivity and Helms-Burton litigation
+              </div>
+              <div class="comparison-cell comparison-cell--sherritt">
+                Capital structure and outright survivability
+              </div>
+              <div class="comparison-cell comparison-cell--melia">
+                Cuba is still a small part of group EBITDA
+              </div>
+            </div>
+          </div>
+
+          <div class="comparison-board comparison-board--mobile" aria-label="Quick comparison cards">
+            <article class="comparison-stack-card comparison-stack-card--carnival">
+              <div class="comparison-stack-header">
+                <a
+                  class="comparison-badge comparison-badge--carnival stock-quote-link"
+                  href="https://robinhood.com/us/en/stocks/CCL/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >$CCL</a
+                >
+                <p class="comparison-header-subtitle">Liquid Proxy</p>
+              </div>
+              <dl class="comparison-stack-list">
+                <div class="comparison-stack-item">
+                  <dt>What It Is</dt>
                   <dd>Liquid tourism and reopening proxy</dd>
                 </div>
-                <div class="comparison-card-item">
-                  <dt>Best Feature</dt>
+                <div class="comparison-stack-item">
+                  <dt>Best Edge</dt>
                   <dd>Deep options market and proven Cuba route economics</dd>
                 </div>
-                <div class="comparison-card-item">
+                <div class="comparison-stack-item">
                   <dt>Main Risk</dt>
                   <dd>Fuel sensitivity and Helms-Burton litigation</dd>
                 </div>
               </dl>
             </article>
 
-            <article class="comparison-card comparison-card--sherritt">
-              <div class="comparison-card-header">
-                <h3 class="comparison-card-title">
-                  <a
-                    class="stock-quote-link"
-                    href="https://finance.yahoo.com/quote/SHERF/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >$SHERF</a
-                  >
-                </h3>
-                <p class="comparison-card-kicker">High-Volatility Beta</p>
+            <article class="comparison-stack-card comparison-stack-card--sherritt">
+              <div class="comparison-stack-header">
+                <a
+                  class="comparison-badge comparison-badge--sherritt stock-quote-link"
+                  href="https://finance.yahoo.com/quote/SHERF/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >$SHERF</a
+                >
+                <p class="comparison-header-subtitle">High-Volatility Beta</p>
               </div>
-              <dl class="comparison-card-list">
-                <div class="comparison-card-item">
-                  <dt>What It Really Is</dt>
+              <dl class="comparison-stack-list">
+                <div class="comparison-stack-item">
+                  <dt>What It Is</dt>
                   <dd>Distressed pure-play Cuba asset</dd>
                 </div>
-                <div class="comparison-card-item">
-                  <dt>Best Feature</dt>
+                <div class="comparison-stack-item">
+                  <dt>Best Edge</dt>
                   <dd>Highest direct upside if the island reopens</dd>
                 </div>
-                <div class="comparison-card-item">
+                <div class="comparison-stack-item">
                   <dt>Main Risk</dt>
                   <dd>Capital structure and outright survivability</dd>
                 </div>
               </dl>
             </article>
 
-            <article class="comparison-card comparison-card--melia">
-              <div class="comparison-card-header">
-                <h3 class="comparison-card-title">
-                  <a
-                    class="stock-quote-link"
-                    href="https://finance.yahoo.com/quote/SMIZF/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >$SMIZF</a
-                  >
-                </h3>
-                <p class="comparison-card-kicker">Asset Scarcity Angle</p>
+            <article class="comparison-stack-card comparison-stack-card--melia">
+              <div class="comparison-stack-header">
+                <a
+                  class="comparison-badge comparison-badge--melia stock-quote-link"
+                  href="https://finance.yahoo.com/quote/SMIZF/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >$SMIZF</a
+                >
+                <p class="comparison-header-subtitle">Asset Scarcity Angle</p>
               </div>
-              <dl class="comparison-card-list">
-                <div class="comparison-card-item">
-                  <dt>What It Really Is</dt>
+              <dl class="comparison-stack-list">
+                <div class="comparison-stack-item">
+                  <dt>What It Is</dt>
                   <dd>Existing hotel footprint already on the island</dd>
                 </div>
-                <div class="comparison-card-item">
-                  <dt>Best Feature</dt>
+                <div class="comparison-stack-item">
+                  <dt>Best Edge</dt>
                   <dd>Hard-asset scarcity with lower business fragility</dd>
                 </div>
-                <div class="comparison-card-item">
+                <div class="comparison-stack-item">
                   <dt>Main Risk</dt>
                   <dd>Cuba is still a small part of group EBITDA</dd>
                 </div>
