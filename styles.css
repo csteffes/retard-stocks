@@ -628,6 +628,16 @@ body[data-page="home"] .page-intro {
   border-top: 1px solid var(--line);
 }
 
+.stock-picks-heading-section {
+  margin-top: 2.15rem;
+}
+
+.stock-picks-title {
+  padding-top: 0;
+  border-top: 0;
+  margin-bottom: -0.2rem;
+}
+
 .stock-section-heading {
   display: flex;
   flex-direction: column;
