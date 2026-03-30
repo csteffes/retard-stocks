@@ -688,7 +688,7 @@
         </section>
 
         <section>
-          <h2>How I Am Trading It</h2>
+          <h2>How I'm Trading It</h2>
           <p>
             The report's cleanest expression for a small account is not equal
             weight. It is role-based. Sherritt gets the biggest slice because it
@@ -697,18 +697,35 @@
             the residual because it is the hard-asset ballast with less chance
             of total impairment.
           </p>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Position</th>
-                  <th>Suggested role</th>
-                  <th>Position Composition</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
+          <div class="position-composition" aria-label="Trading allocation">
+            <div class="position-composition-header">
+              <p class="position-composition-label">Position Composition</p>
+              <p class="position-composition-note">
+                Role-based sizing for a small speculative account
+              </p>
+            </div>
+            <div class="position-composition-bar" aria-hidden="true">
+              <span
+                class="position-composition-segment position-composition-segment--sherritt"
+                style="width: 40%"
+              ></span>
+              <span
+                class="position-composition-segment position-composition-segment--carnival"
+                style="width: 35%"
+              ></span>
+              <span
+                class="position-composition-segment position-composition-segment--melia"
+                style="width: 20%"
+              ></span>
+              <span
+                class="position-composition-segment position-composition-segment--cash"
+                style="width: 5%"
+              ></span>
+            </div>
+            <div class="position-card-grid">
+              <article class="position-card position-card--sherritt">
+                <div class="position-card-header">
+                  <h3 class="position-card-title">
                     <a
                       class="stock-quote-link"
                       href="https://finance.yahoo.com/quote/SHERF/"
@@ -717,12 +734,15 @@
                       >$SHERF</a
                     >
                     shares
-                  </td>
-                  <td>Pure Cuba optionality / highest upside</td>
-                  <td>~40%</td>
-                </tr>
-                <tr>
-                  <td>
+                  </h3>
+                  <p class="position-card-weight">~40%</p>
+                </div>
+                <p class="position-card-role">Pure Cuba optionality / highest upside</p>
+              </article>
+
+              <article class="position-card position-card--carnival">
+                <div class="position-card-header">
+                  <h3 class="position-card-title">
                     <a
                       class="stock-quote-link"
                       href="https://robinhood.com/us/en/stocks/CCL/"
@@ -731,12 +751,15 @@
                       >$CCL</a
                     >
                     Jan 2027 $30 calls
-                  </td>
-                  <td>Liquid leveraged reopening bet</td>
-                  <td>~35%</td>
-                </tr>
-                <tr>
-                  <td>
+                  </h3>
+                  <p class="position-card-weight">~35%</p>
+                </div>
+                <p class="position-card-role">Liquid leveraged reopening bet</p>
+              </article>
+
+              <article class="position-card position-card--melia">
+                <div class="position-card-header">
+                  <h3 class="position-card-title">
                     <a
                       class="stock-quote-link"
                       href="https://finance.yahoo.com/quote/MEL.MC/"
@@ -753,17 +776,20 @@
                       >$SMIZF</a
                     >
                     equivalent exposure
-                  </td>
-                  <td>Hotel-footprint asset play</td>
-                  <td>~20%</td>
-                </tr>
-                <tr>
-                  <td>Cash</td>
-                  <td>Flexibility for volatility and fills</td>
-                  <td>~5%</td>
-                </tr>
-              </tbody>
-            </table>
+                  </h3>
+                  <p class="position-card-weight">~20%</p>
+                </div>
+                <p class="position-card-role">Hotel-footprint asset play</p>
+              </article>
+
+              <article class="position-card position-card--cash">
+                <div class="position-card-header">
+                  <h3 class="position-card-title">Cash</h3>
+                  <p class="position-card-weight">~5%</p>
+                </div>
+                <p class="position-card-role">Flexibility for volatility and fills</p>
+              </article>
+            </div>
           </div>
           <p>
             The practical caveats matter.

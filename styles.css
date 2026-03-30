@@ -679,6 +679,139 @@ body[data-page="home"] .page-intro {
   margin: 1.25rem 0 1.75rem;
 }
 
+.position-composition {
+  margin: 1.4rem 0 1.75rem;
+  padding: 1.25rem 1.3rem 1.35rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.position-composition-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.position-composition-label,
+.position-composition-note,
+.position-card-role,
+.position-card-weight {
+  font-family: var(--ui-font);
+}
+
+.position-composition-label {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.position-composition-note {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.position-composition-bar {
+  display: flex;
+  width: 100%;
+  height: 0.95rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #ece5d9;
+  box-shadow: inset 0 0 0 1px rgba(99, 95, 88, 0.08);
+}
+
+.position-composition-segment {
+  display: block;
+  height: 100%;
+}
+
+.position-composition-segment--sherritt {
+  background: #9e7f2d;
+}
+
+.position-composition-segment--carnival {
+  background: #274762;
+}
+
+.position-composition-segment--melia {
+  background: #6d2cc0;
+}
+
+.position-composition-segment--cash {
+  background: #b8afa2;
+}
+
+.position-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 1rem;
+  margin-top: 1rem;
+}
+
+.position-card {
+  padding: 0.95rem 1rem 1rem;
+  border: 1px solid var(--line);
+  background: #fbf8f1;
+}
+
+.position-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  margin-bottom: 0.45rem;
+}
+
+.position-card-title {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.35;
+}
+
+.position-card-title a {
+  font-weight: 600;
+}
+
+.position-card-weight {
+  margin: 0;
+  flex-shrink: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.position-card-role {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.position-card--sherritt {
+  border-left: 3px solid #9e7f2d;
+}
+
+.position-card--carnival {
+  border-left: 3px solid #274762;
+}
+
+.position-card--melia {
+  border-left: 3px solid #6d2cc0;
+}
+
+.position-card--cash {
+  border-left: 3px solid #b8afa2;
+}
+
 .chart-grid {
   display: grid;
   gap: 1rem;
@@ -1174,7 +1307,8 @@ body[data-page="home"] .page-intro {
 
   .archive-item-row,
   .post-pagination,
-  .chart-grid--two {
+  .chart-grid--two,
+  .position-card-grid {
     grid-template-columns: 1fr;
   }
 
