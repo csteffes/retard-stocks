@@ -975,6 +975,7 @@ body[data-page="home"] .page-intro {
 
 .stock-price-card {
   margin-top: 1.35rem;
+  width: min(100%, 42rem);
   padding: 1.25rem 1.35rem 1.15rem;
   border: 1px solid #ddd3c5;
   border-radius: 1rem;
