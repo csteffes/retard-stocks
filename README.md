@@ -16,20 +16,31 @@ This project is intentionally simple:
 
 ```text
 .
+├── .nojekyll
+├── CNAME
 ├── about.html
 ├── archive.html
 ├── data/
 │   └── picks.js
+├── home/
+│   └── index.html
 ├── index.html
+├── images/
+│   └── cuba-polymarket-meme-horizontal-v2.jpg
+├── logo.svg
 ├── picks/
 │   └── cuba-trade.html
 ├── PROMPT_STOCK_ANALYSIS.md
 ├── README.md
 ├── SAMPLE_GENERATED_ANALYSIS.md
 ├── script.js
+├── social-preview-v3.html
+├── social-preview-v3.png
 ├── STOCK_ANALYSIS_TEMPLATE.md
 └── styles.css
 ```
+
+`index.html` is a redirect entrypoint. The actual homepage lives at `home/index.html`.
 
 ## How to add a new pick
 
@@ -48,7 +59,7 @@ This project is intentionally simple:
 
 ## How to edit homepage copy
 
-- Edit the intro and supporting copy in `index.html`
+- Edit the homepage intro and supporting copy in `home/index.html`
 - Edit the About and legal text in `about.html`
 - Edit visual styling in `styles.css`
 

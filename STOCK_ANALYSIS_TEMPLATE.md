@@ -67,7 +67,7 @@
 - [Risk]
 - [Risk]
 
-## Catalysts / timeline
+## Catalysts & Timeline
 
 <!-- What events, disclosures, or operating milestones matter next? -->
 - [Catalyst]

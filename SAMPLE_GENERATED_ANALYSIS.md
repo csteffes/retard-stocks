@@ -53,7 +53,7 @@ The bear case is that volume growth softens, pricing gets more competitive, or o
 - A weaker used-vehicle environment that temporarily pressures auction activity.
 - Paying too high a price for quality and durability.
 
-## Catalysts / timeline
+## Catalysts & Timeline
 
 - Quarterly volume and unit-economics updates.
 - Margin performance as the network expands.

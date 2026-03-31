@@ -106,23 +106,6 @@ function renderPreviewMedia(pick, extraClass = "") {
     return "";
   }
 
-  if (media.type === "split-meme") {
-    return `
-      <a
-        class="pick-card-media pick-card-media--split"
-        href="${escapeHtml(pick.href)}"
-        aria-label="Open ${escapeHtml(pick.title)}"
-      >
-        <span class="pick-card-media-panel pick-card-media-panel--left">
-          <img src="${escapeHtml(media.src)}" alt="${escapeHtml(media.alt || pick.title)}" />
-        </span>
-        <span class="pick-card-media-panel pick-card-media-panel--right" aria-hidden="true">
-          <img src="${escapeHtml(media.src)}" alt="" />
-        </span>
-      </a>
-    `;
-  }
-
   return `
     <a
       class="${escapeHtml(mediaClassName)}"

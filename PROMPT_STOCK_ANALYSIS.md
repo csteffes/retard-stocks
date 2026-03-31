@@ -131,7 +131,7 @@ Now write the memo in this exact format:
 - [Risk 2]
 - [Risk 3]
 
-## Catalysts / timeline
+## Catalysts & Timeline
 
 - [Catalyst 1]
 - [Catalyst 2]
